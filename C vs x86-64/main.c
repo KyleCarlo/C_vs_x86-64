@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <time.h>
 #include "SAXPY_c.h"
+#include <Windows.h>
 
 extern void saxpy_asm(size_t n, float A, float* X, float* Y, float* Z);
 
 int main() {
-	//int n = {};
-	
-	const size_t n = 1 << 30; // array size
+	int versions[3] = {20,24,30};
+	const size_t n = 1 << 20; // array size
 	const size_t ARRAY_BYTES = n * sizeof(float); // size in bytes
 	clock_t start, end; // timer variables
 	size_t error_count = 0; // sanity variable
@@ -50,10 +50,10 @@ int main() {
 	
 	printf("C function took an average time of %f milliseconds across %d runs for array size %llu\n", ave_time, loop, n);
 
-	/* CORRECTNESS CHECK 
+	/* CORRECTNESS CHECK */
 	for (size_t i = 0; i < 10; i++) {
 		printf("C Output#%llu: %f\n", i + 1, Z_c[i]);
-	} */
+	} 
 	
 	/*** ---------- x86-64 kernel call ---------- ***/
 
@@ -66,6 +66,7 @@ int main() {
 		saxpy_asm(n, A, X, Y, Z_asm);
 		end = clock();
 
+		Sleep(1); // buffer
 		time_taken = ((double)(end - start)) * 1e3 / CLOCKS_PER_SEC;
 		ave_time += time_taken;
 	}
@@ -74,10 +75,10 @@ int main() {
 
 	printf("x86-64 function took an average time of %f milliseconds across %d runs for array size %llu\n", ave_time, loop, n);
 
-	/* CORRECTNESS CHECK
+	/* CORRECTNESS CHECK */
 	for (size_t i = 0; i < 10; i++) {
 		printf("x86-64 Output#%llu: %f\n", i + 1, Z_asm[i]);
-	} */
+	} 
 
 	/*** ---------- SANITY CHECK ---------- ***/
 
@@ -88,10 +89,16 @@ int main() {
 	}
 
 	if(error_count == 0){
-		printf("No errors found\n");
+		printf("No errors found.\n");
 	} else {
-		printf("%llu errors found\n", error_count);
+		printf("%llu errors found.\n", error_count);
 	}
+
+	// free memory
+	free(X);
+	free(Y);
+	free(Z_c);
+	free(Z_asm);
 
 	return 0;
 }
