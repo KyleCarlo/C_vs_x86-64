@@ -2,6 +2,14 @@
 ## Overview
 - This repository contains an experiment that compares the execution time between C and x86-64 assembly language, developed as a course requirement for LBYARCH (Computer Organization and Architecture Laboratory) at De La Salle University - Manila. The experiment inputs hard-coded scalar and vector values and a sample function created using C and x86-64. The accuracy of the function outputs and the speed are evaluated for this experiment.
 
+## Steps to Run Locally
+1. Download repository as ZIP
+2. Open the <a href="https://github.com/KyleCarlo/C_vs_x86-64/blob/main/C%20vs%20x86-64.sln">C vs x86-64.sln</a> file through Microsoft Visual Studio 2022
+3. Check that the configuration properties of the files and solution are appropriate to your local system
+4. Choose Debug or Release Mode
+5. Build Solution *Note: Errors may be encountered if the file properties are not configured properly*
+6. Run
+
 ## Project Specifications
 - Input: Takes a scalar value ***A***, vector ***X***, vector ***Y***, and integer ***n*** that defines the length of X and Y. In this experiment, the following values will be fixed (hard-coded) for consistency.
     - ***n*** is an integer value that can be an **element of {2^20, 2^24, 2^30}**
