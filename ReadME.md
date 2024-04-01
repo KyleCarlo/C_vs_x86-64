@@ -113,7 +113,7 @@ pop rbp
 ret
 ```
 ## Analysis
-- In Visual Studio, there is 2 given build confiigurations namely ***Debug*** and ***Release*** by default.
+- In Visual Studio, there is 2 given build confiigurations namely ***Debug*** and ***Release*** by default. Both build configurations are used to test the experiment.
     - **Debug** mode does extra checking and creates a file with *.pdb* extension. The pdb files are necessary for a detailed debugging that is done by the compiler.
     - **Release** mode skips the extra checking and will **not** create pdb files. The release mode will try to optimize the C compiler at its best performance.  
 ### Debug Mode Results
@@ -121,8 +121,9 @@ ret
 ### Release Mode Results
 ![RELEASE](screenshots/RELEASE.png)
 ### Comparison
-- As observed in debug mode, the x86-64 kernel is always faster than C kernel across all versions. The C almost doubled the execution time of x86-64. 
-- 
+- In debug mode, the C kernel exhibits average execution times of 5.00, 38.10, and 3871.30 milliseconds for input sizes of 2^20, 2^24, and 2^30 respectively, while the x86-64 kernel demonstrates 1.53, 19.63, and 2436.23 milliseconds for the same inputs. Conversely, in release mode, the C kernel shows execution times of 2.00, 18.20, and 2566.37 milliseconds, whereas the x86-64 kernel displays 1.67, 19.23, and 1530.87 milliseconds for the corresponding input sizes. These results are based on the screenshots of 1 run shown <a href="#analysis">above</a>.
+- The x86-64 kernel consistently outperforms the C kernel in debug mode. However, the performance comparison between the two kernels is inconsistent in release mode. There are instances where C is faster than x86-64 and the results between the kernels are closer to each other compare to debug mode.
+- The reason for inconsistency and faster x86-64 instances is due to the optimization done by the release mode. 
 ## Authors
 - Kyle Carlo Lasala (kyle_lasala@dlsu.edu.ph)
 - Maria Monica Manlises (maria_monica_manlises@dlsu.edu.ph)
