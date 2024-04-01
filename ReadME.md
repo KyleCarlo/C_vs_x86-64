@@ -88,7 +88,7 @@ for (size_t i = 0; i < n; i++) {
     - ***R10*** temporarily saves the 5th parameter *(RBP+32)*, ***RBX*** serves as a counter, ***XMM4*** temporarily saves the X_i value, ***XMM5*** temporarily saves the Y_i value 
     - Multiply the register *XMM4* and the value at *[r8 + 4 \* rbx]* *(AX[i])* and save to register *XMM4*
     - Add the registers *XMM4* and *XMM5* *(AX[i] + Y[i])* and save to register *XMM4*
-    - Save the result to *[R10 + 4 * RBX]* *(Z[i] = AX[i] + Y[i])*
+    - Save the result to *[r10 + 4 * rbx]* *(Z[i] = AX[i] + Y[i])*
     - Move the loop counter by incrementing *RBX*. If the loop counter is less than the length *n*, proceed to the next element.
 - The code below shows the SAXPY function in assembly.
 ```
